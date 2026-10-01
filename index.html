@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyería El Diamante</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- BARRA SUPERIOR -->
+<nav class="barra-superior">
+    <div class="logo">EL DIAMANTE</div>
+    <div class="nav-botones">
+        <button class="btn-idioma activo">ESP</button>
+        <button class="btn-idioma">ENG</button>
+        <button class="btn-icono" title="Carrito">🛒 <span class="contador">0</span></button>
+    </div>
+</nav>
+
+<!-- PÁGINA 1: INICIO -->
+<section class="pagina activa" id="pag-inicio">
+    <div class="contenido-centrado">
+        <img src="imagenes/diamante.jpg" alt="El Diamante" class="img-inicio">
+        <h1>DISEÑA TU PROPIA PIEZA</h1>
+        <p class="subtitulo">Exclusividad y elegancia en cada detalle</p>
+        <button class="btn-principal" onclick="irPagina('pag-categorias')">EMPEZAR</button>
+    </div>
+</section>
+
+<!-- PÁGINA 2: ELIGE TU PIEZA -->
+<section class="pagina" id="pag-categorias">
+    <button class="btn-volver" onclick="irPagina('pag-inicio')">← Volver</button>
+    <h2 class="titulo-pagina">Elige tu pieza</h2>
+    <div class="cuadro-opciones">
+        <div class="opcion" onclick="irPagina('pag-cadenas')">
+            <span class="numero">01</span>
+            <h3>Cadenas</h3>
+            <p class="desc-opcion">Elegancia que te acompaña siempre</p>
+            <button class="btn-vamos">Ver modelos →</button>
+        </div>
+        <div class="opcion" onclick="irPagina('pag-anillos')">
+            <span class="numero">02</span>
+            <h3>Anillos</h3>
+            <p class="desc-opcion">Para los momentos más especiales</p>
+            <button class="btn-vamos">Ver modelos →</button>
+        </div>
+        <div class="opcion" onclick="irPagina('pag-pulseras')">
+            <span class="numero">03</span>
+            <h3>Pulseras</h3>
+            <p class="desc-opcion">Diseños que resaltan tu estilo</p>
+            <button class="btn-vamos">Ver modelos →</button>
+        </div>
+    </div>
+</section>
+
+<!-- PÁGINA 3: CADENAS -->
+<section class="pagina" id="pag-cadenas">
+    <button class="btn-volver" onclick="irPagina('pag-categorias')">← Volver</button>
+    <h2 class="titulo-pagina">Cadenas</h2>
+    <div class="contenedor-pagina">
+        <div class="galeria">
+            <img src="imagenes/cadena1.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Tejido Ancla Diamantada 14K">
+            <img src="imagenes/cadena2.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Tejido Fígaro 14K">
+            <img src="imagenes/cadena3.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Forzada 18K">
+            <img src="imagenes/cadena4.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Esclava 10K">
+        </div>
+        <div class="formulario">
+            <div class="grupo-form">
+                <label>Medida en centímetros</label>
+                <input type="text" id="medida-cadena" placeholder="Ej: 45 cm">
+            </div>
+            <div class="grupo-form">
+                <label>Modelo seleccionado</label>
+                <input type="text" id="modelo-cadena" placeholder="Selecciona una imagen" readonly>
+            </div>
+            <div class="grupo-form">
+                <label>Calidad del oro</label>
+                <div class="opciones-k">
+                    <button type="button" class="btn-k">10K</button>
+                    <button type="button" class="btn-k">12K</button>
+                    <button type="button" class="btn-k">14K</button>
+                    <button type="button" class="btn-k">18K</button>
+                </div>
+            </div>
+            <button class="btn-comprar" onclick="irPagina('pag-pago')">Continuar compra</button>
+        </div>
+    </div>
+</section>
+
+<!-- PÁGINA 4: ANILLOS -->
+<section class="pagina" id="pag-anillos">
+    <button class="btn-volver" onclick="irPagina('pag-categorias')">← Volver</button>
+    <h2 class="titulo-pagina">Anillos</h2>
+    <div class="contenedor-pagina">
+        <div class="galeria">
+            <img src="imagenes/anillo1.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo Solitario 14K">
+            <img src="imagenes/anillo2.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo Alianza 18K">
+            <img src="imagenes/anillo3.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo con Piedras 14K">
+            <img src="imagenes/anillo4.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo Clásico 10K">
+        </div>
+        <div class="formulario">
+            <div class="grupo-form">
+                <label>Número del anillo</label>
+                <input type="text" id="medida-anillo" placeholder="Ej: 7">
+            </div>
+            <div class="grupo-form">
+                <label>Modelo seleccionado</label>
+                <input type="text" id="modelo-anillo" placeholder="Selecciona una imagen" readonly>
+            </div>
+            <div class="grupo-form">
+                <label>Calidad del oro</label>
+                <div class="opciones-k">
+                    <button type="button" class="btn-k">10K</button>
+                    <button type="button" class="btn-k">12K</button>
+                    <button type="button" class="btn-k">14K</button>
+                    <button type="button" class="btn-k">18K</button>
+                </div>
+            </div>
+            <button class="btn-comprar" onclick="irPagina('pag-pago')">Continuar compra</button>
+        </div>
+    </div>
+</section>
+
+<!-- PÁGINA 5: PULSERAS -->
+<section class="pagina" id="pag-pulseras">
+    <button class="btn-volver" onclick="irPagina('pag-categorias')">← Volver</button>
+    <h2 class="titulo-pagina">Pulseras</h2>
+    <div class="contenedor-pagina">
+        <div class="galeria">
+            <img src="imagenes/pulsera1.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Esclava 14K">
+            <img src="imagenes/pulsera2.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Tejido 18K">
+            <img src="imagenes/pulsera3.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Forzada 12K">
+            <img src="imagenes/pulsera4.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Clásica 10K">
+        </div>
+        <div class="formulario">
+            <div class="grupo-form">
+                <label>Medida en centímetros</label>
+                <input type="text" id="medida-pulsera" placeholder="Ej: 18 cm">
+            </div>
+            <div class="grupo-form">
+                <label>Modelo seleccionado</label>
+                <input type="text" id="modelo-pulsera" placeholder="Selecciona una imagen" readonly>
+            </div>
+            <div class="grupo-form">
+                <label>Calidad del oro</label>
+                <div class="opciones-k">
+                    <button type="button" class="btn-k">10K</button>
+                    <button type="button" class="btn-k">12K</button>
+                    <button type="button" class="btn-k">14K</button>
+                    <button type="button" class="btn-k">18K</button>
+                </div>
+            </div>
+            <button class="btn-comprar" onclick="irPagina('pag-pago')">Continuar compra</button>
+        </div>
+    </div>
+</section>
+
+<!-- PÁGINA 6: MÉTODOS DE PAGO -->
+<section class="pagina" id="pag-pago">
+    <button class="btn-volver" onclick="irPaginaAnterior()">← Volver</button>
+    <h2 class="titulo-pagina">Método de pago</h2>
+    <p class="subtitulo-pagina">Selecciona cómo deseas pagar</p>
+    
+    <div class="contenido-pago">
+        <!-- Tarjeta Crédito/Débito -->
+        <div class="metodo-pago" data-metodo="tarjeta" onclick="seleccionarMetodo(this)">
+            💳 Tarjeta de Crédito / Débito
+        </div>
+        <div class="form-pago" id="form-tarjeta">
+            <div class="grupo-form"><label>Número de tarjeta</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+            <div class="fila-doble">
+                <div class="grupo-form"><label>Fecha de vencimiento</label><input type="text" placeholder="MM/AA" maxlength="5"></div>
+                <div class="grupo-form"><label>CVV</label><input type="text" placeholder="123" maxlength="4"></div>
+            </div>
+            <div class="grupo-form"><label>Nombre del titular</label><input type="text" placeholder="Tu nombre completo"></div>
+        </div>
+
+        <!-- PayPal -->
+        <div class="metodo-pago" data-metodo="paypal" onclick="seleccionarMetodo(this)">
+            🅿️ PayPal
+        </div>
+        <div class="form-pago" id="form-paypal">
+            <div class="grupo-form"><label>Correo electrónico de PayPal</label><input type="email" placeholder="tu@email.com"></div>
+        </div>
+
+        <!-- OXXO PAY -->
+        <div class="metodo-pago" data-metodo="oxxo" onclick="seleccionarMetodo(this)">
+            🏪 OXXO PAY / Pago en OXXO
+        </div>
+        <div class="form-pago" id="form-oxxo">
+            <p class="texto-ayuda">Se generará un código de pago para presentar en cualquier OXXO</p>
+        </div>
+
+        <!-- Mercado Pago -->
+        <div class="metodo-pago" data-metodo="mercadopago" onclick="seleccionarMetodo(this)">
+            🛒 Mercado Pago
+        </div>
+        <div class="form-pago" id="form-mercadopago">
+            <p class="texto-ayuda">Paga con tu cuenta de Mercado Pago o con tarjeta</p>
+            <div class="grupo-form"><label>Correo de Mercado Pago</label><input type="email" placeholder="tu@email.com"></div>
+        </div>
+
+        <!-- Tienda Física -->
+        <div class="metodo-pago" data-metodo="tienda" onclick="seleccionarMetodo(this)">
+            🏬 Pago en Tienda Física
+        </div>
+        <div class="form-pago" id="form-tienda">
+            <p class="texto-ayuda">Acude a nuestra sucursal con tu número de pedido</p>
+        </div>
+
+        <button class="btn-comprar" onclick="irPagina('pag-datos')">Confirmar método de pago</button>
+    </div>
+</section>
+
+<!-- PÁGINA 7: DATOS PERSONALES -->
+<section class="pagina" id="pag-datos">
+    <button class="btn-volver" onclick="irPagina('pag-pago')">← Volver</button>
+    <h2 class="titulo-pagina">Tus datos</h2>
+    <p class="subtitulo-pagina">Para generar tu nota de pedido</p>
+    <div class="contenido-pago">
+        <div class="grupo-form">
+            <label>Nombre completo</label>
+            <input type="text" id="cliente-nombre" placeholder="María Pérez López">
+        </div>
+        <div class="grupo-form">
+            <label>Número de teléfono</label>
+            <input type="tel" id="cliente-telefono" placeholder="951 123 4567" maxlength="12">
+        </div>
+        <button class="btn-comprar" onclick="generarNota()">CONFIRMAR PEDIDO</button>
+    </div>
+</section>
+
+<!-- PÁGINA 8: NOTA / GRACIAS -->
+<section class="pagina" id="pag-nota">
+    <div class="contenido-centrado">
+        <h2>✅ ¡Gracias por tu compra!</h2>
+        <div class="recibo">
+            <h3>💎 JOYERÍA EL DIAMANTE</h3>
+            <p class="etiqueta-nota">NOTA DE PEDIDO</p>
+            <p><strong>Folio:</strong> <span id="nota-folio"></span></p>
+            <p><strong>Fecha:</strong> <span id="nota-fecha"></span></p>
+            <p><strong>Cliente:</strong> <span id="nota-nombre"></span></p>
+            <p><strong>Teléfono:</strong> <span id="nota-telefono"></span></p>
+            <p><strong>Pieza:</strong> <span id="nota-pieza"></span></p>
+            <p><strong>Modelo:</strong> <span id="nota-modelo"></span></p>
+            <p><strong>Calidad de oro:</strong> <span id="nota-k"></span></p>
+            <p><strong>Método de pago:</strong> <span id="nota-metodo"></span></p>
+            <hr style="margin:15px 0; border-color:var(--borde)">
+            <p>Nos pondremos en contacto contigo para confirmar tu pedido.</p>
+        </div>
+        <button class="btn-principal" onclick="irPagina('pag-inicio'); resetearTodo()">Volver al inicio</button>
+    </div>
+</section>
+
+<script>
+let paginaAnterior = 'pag-categorias';
+let metodoSeleccionado = null;
+let datosPedido = {};
+
+function irPagina(idPagina) {
+    if (idPagina === 'pag-pago') {
+        paginaAnterior = document.querySelector('.pagina.activa').id;
+        guardarDatosPedido();
+    }
+    document.querySelectorAll('.pagina').forEach(p => p.classList.remove('activa'));
+    document.getElementById(idPagina).classList.add('activa');
+    window.scrollTo(0, 0);
+}
+
+function irPaginaAnterior() {
+    irPagina(paginaAnterior);
+}
+
+function guardarDatosPedido() {
+    const paginaActiva = document.querySelector('.pagina.activa');
+    const id = paginaActiva.id;
+    let tipoPieza = '', modelo = '', medida = '', oro = '';
+
+    if (id === 'pag-cadenas') {
+        tipoPieza = 'Cadena';
+        modelo = document.getElementById('modelo-cadena').value || 'No seleccionado';
+        medida = document.getElementById('medida-cadena').value || 'No especificada';
+        oro = document.querySelector('#pag-cadenas .btn-k.seleccionado')?.textContent || 'No seleccionado';
+    } else if (id === 'pag-anillos') {
+        tipoPieza = 'Anillo';
+        modelo = document.getElementById('modelo-anillo').value || 'No seleccionado';
+        medida = document.getElementById('medida-anillo').value || 'No especificada';
+        oro = document.querySelector('#pag-anillos .btn-k.seleccionado')?.textContent || 'No seleccionado';
+    } else if (id === 'pag-pulseras') {
+        tipoPieza = 'Pulsera';
+        modelo = document.getElementById('modelo-pulsera').value || 'No seleccionado';
+        medida = document.getElementById('medida-pulsera').value || 'No especificada';
+        oro = document.querySelector('#pag-pulseras .btn-k.seleccionado')?.textContent || 'No seleccionado';
+    }
+
+    datosPedido = { tipoPieza, modelo, medida, oro };
+}
+
+function seleccionarMetodo(elemento) {
+    document.querySelectorAll('.metodo-pago').forEach(m => m.classList.remove('activo'));
+    document.querySelectorAll('.form-pago').forEach(f => f.classList.remove('visible'));
+    
+    elemento.classList.add('activo');
+    metodoSeleccionado = elemento.dataset.metodo;
+    document.getElementById(`form-${metodoSeleccionado}`).classList.add('visible');
+    
+    const nombres = {
+        tarjeta: 'Tarjeta de Crédito / Débito',
+        paypal: 'PayPal',
+        oxxo: 'OXXO PAY',
+        mercadopago: 'Mercado Pago',
+        tienda: 'Pago en Tienda Física'
+    };
+    datosPedido.metodoPago = nombres[metodoSeleccionado];
+}
+
+function generarNota() {
+    const nombre = document.getElementById('cliente-nombre').value.trim();
+    const telefono = document.getElementById('cliente-telefono').value.trim();
+    
+    if (!nombre || !telefono) {
+        alert('Por favor llena tu nombre y teléfono');
+        return;
+    }
+
+    const fecha = new Date();
+    const fechaTexto = fecha.toLocaleDateString('es-MX', {
+        day: 'numeric', month: 'long', year: 'numeric'
+    });
+    const folio = 'PED-' + Date.now().toString().slice(-8);
+
+    document.getElementById('nota-folio').textContent = folio;
+    document.getElementById('nota-fecha').textContent = fechaTexto;
+    document.getElementById('nota-nombre').textContent = nombre;
+    document.getElementById('nota-telefono').textContent = telefono;
+    document.getElementById('nota-pieza').textContent = datosPedido.tipoPieza;
+    document.getElementById('nota-modelo').textContent = datosPedido.modelo;
+    document.getElementById('nota-k').textContent = datosPedido.oro;
+    document.getElementById('nota-metodo').textContent = datosPedido.metodoPago || 'No especificado';
+
+    irPagina('pag-nota');
+}
+
+function resetearTodo() {
+    document.querySelectorAll('input').forEach(i => i.value = '');
+    document.querySelectorAll('.btn-k, .metodo-pago, .img-opcion').forEach(el => el.classList.remove('seleccionado', 'activo', 'seleccionada'));
+    document.querySelectorAll('.form-pago').forEach(f => f.classList.remove('visible'));
+    metodoSeleccionado = null;
+    datosPedido = {};
+}
+
+// Seleccionar oro
+document.addEventListener('click', e => {
+    if (e.target.classList.contains('btn-k')) {
+        e.target.parentElement.querySelectorAll('.btn-k').forEach(b => b.classList.remove('seleccionado'));
+        e.target.classList.add('seleccionado');
+    }
+});
+
+// Seleccionar imagen → llena modelo
+document.addEventListener('click', e => {
+    if (e.target.classList.contains('img-opcion')) {
+        const galeria = e.target.parentElement;
+        galeria.querySelectorAll('.img-opcion').forEach(i => i.classList.remove('seleccionada'));
+        e.target.classList.add('seleccionada');
+        const nombre = e.target.getAttribute('data-nombre');
+        const pagina = e.target.closest('.pagina');
+        const campo = pagina.querySelector('input[id^="modelo"]');
+        if (campo) campo.value = nombre;
+    }
+});
+</script>
+
+</body>
+</html>
