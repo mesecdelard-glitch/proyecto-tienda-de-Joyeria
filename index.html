@@ -17,9 +17,17 @@
     <div class="nav-botones">
         <button class="btn-idioma activo">ESP</button>
         <button class="btn-idioma">ENG</button>
-        <button class="btn-icono" title="Carrito">🛒 <span class="contador">0</span></button>
+        <button class="btn-icono" title="Carrito" onclick="mostrarCarrito()">🛒 <span class="contador">0</span></button>
     </div>
 </nav>
+
+<!-- CINTA DE TEXTO (avanza de izquierda a derecha) -->
+<div class="cinta-texto" aria-label="Mensajes de Joyería El Diamante">
+    <div class="cinta-pista">
+        <span>💎 Puntualidad y confianza nos distinguen &nbsp;•&nbsp; Hecho por Mesec De la Rosa Duran &nbsp;•&nbsp; 💎 Puntualidad y confianza nos distinguen &nbsp;•&nbsp; Hecho por Mesec De la Rosa Duran &nbsp;•&nbsp; 💎 Puntualidad y confianza nos distinguen &nbsp;•&nbsp; Hecho por Mesec De la Rosa Duran &nbsp;•&nbsp; 💎 Puntualidad y confianza nos distinguen &nbsp;•&nbsp; Hecho por Mesec De la Rosa Duran &nbsp;•&nbsp;</span>
+        <span aria-hidden="true">💎 Puntualidad y confianza nos distinguen &nbsp;•&nbsp; Hecho por Mesec De la Rosa Duran &nbsp;•&nbsp; 💎 Puntualidad y confianza nos distinguen &nbsp;•&nbsp; Hecho por Mesec De la Rosa Duran &nbsp;•&nbsp; 💎 Puntualidad y confianza nos distinguen &nbsp;•&nbsp; Hecho por Mesec De la Rosa Duran &nbsp;•&nbsp; 💎 Puntualidad y confianza nos distinguen &nbsp;•&nbsp; Hecho por Mesec De la Rosa Duran &nbsp;•&nbsp;</span>
+    </div>
+</div>
 
 <!-- PÁGINA 1: INICIO -->
 <section class="pagina activa" id="pag-inicio">
@@ -37,18 +45,21 @@
     <h2 class="titulo-pagina">Elige tu pieza</h2>
     <div class="cuadro-opciones">
         <div class="opcion" onclick="irPagina('pag-cadenas')">
+            <img src="imagenes/cadena1.jpg" alt="Cadenas" class="img-categoria">
             <span class="numero">01</span>
             <h3>Cadenas</h3>
             <p class="desc-opcion">Elegancia que te acompaña siempre</p>
             <button class="btn-vamos">Ver modelos →</button>
         </div>
         <div class="opcion" onclick="irPagina('pag-anillos')">
+            <img src="imagenes/anillo1.jpg" alt="Anillos" class="img-categoria">
             <span class="numero">02</span>
             <h3>Anillos</h3>
             <p class="desc-opcion">Para los momentos más especiales</p>
             <button class="btn-vamos">Ver modelos →</button>
         </div>
         <div class="opcion" onclick="irPagina('pag-pulseras')">
+            <img src="imagenes/pulsera1.jpg" alt="Pulseras" class="img-categoria">
             <span class="numero">03</span>
             <h3>Pulseras</h3>
             <p class="desc-opcion">Diseños que resaltan tu estilo</p>
@@ -63,12 +74,16 @@
     <h2 class="titulo-pagina">Cadenas</h2>
     <div class="contenedor-pagina">
         <div class="galeria">
-            <img src="imagenes/cadena1.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Tejido Ancla Diamantada 14K">
-            <img src="imagenes/cadena2.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Tejido Fígaro 14K">
-            <img src="imagenes/cadena3.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Forzada 18K">
-            <img src="imagenes/cadena4.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Esclava 10K">
+            <img src="imagenes/cadena1.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Tejido Ancla Diamantada">
+            <img src="imagenes/cadena2.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Tejido Fígaro">
+            <img src="imagenes/cadena3.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Forzada">
+            <img src="imagenes/cadena4.jpg" alt="Cadena" class="img-opcion" data-nombre="Cadena Esclava">
         </div>
         <div class="formulario">
+            <div class="aviso-peso">
+                <strong>Tú eliges el peso: de 4 a 200 gramos</strong>
+                Cada pieza debe pesar mínimo 4 gramos para que no quede delgada, y máximo 200 gramos. El precio se calcula con el peso que elijas por el precio del oro por gramo de la calidad que escojas.
+            </div>
             <div class="grupo-form">
                 <label>Medida en centímetros</label>
                 <input type="text" id="medida-cadena" placeholder="Ej: 45 cm">
@@ -78,15 +93,24 @@
                 <input type="text" id="modelo-cadena" placeholder="Selecciona una imagen" readonly>
             </div>
             <div class="grupo-form">
+                <label>Peso de la pieza (gramos)</label>
+                <input type="number" id="peso-cadena" class="input-peso" placeholder="Ej: 10 (mín. 4, máx. 200)" min="4" max="200" step="0.1" inputmode="decimal">
+            </div>
+            <div class="grupo-form">
                 <label>Calidad del oro</label>
                 <div class="opciones-k">
-                    <button type="button" class="btn-k">10K</button>
-                    <button type="button" class="btn-k">12K</button>
-                    <button type="button" class="btn-k">14K</button>
-                    <button type="button" class="btn-k">18K</button>
+                    <button type="button" class="btn-k" data-k="10K">10K<small>$1,750 / gr</small></button>
+                    <button type="button" class="btn-k" data-k="12K">12K<small>$2,100 / gr</small></button>
+                    <button type="button" class="btn-k" data-k="14K">14K<small>$2,550 / gr</small></button>
+                    <button type="button" class="btn-k" data-k="18K">18K<small>$3,000 / gr</small></button>
                 </div>
             </div>
-            <button class="btn-comprar" onclick="irPagina('pag-pago')">Continuar compra</button>
+            <div class="precio-total">
+                <span class="precio-etiqueta">Precio estimado</span>
+                <strong class="precio-valor">Elige tu peso y la calidad de oro</strong>
+                <span class="precio-detalle"></span>
+            </div>
+            <button class="btn-comprar" onclick="continuarCompra()">Continuar compra</button>
         </div>
     </div>
 </section>
@@ -97,12 +121,16 @@
     <h2 class="titulo-pagina">Anillos</h2>
     <div class="contenedor-pagina">
         <div class="galeria">
-            <img src="imagenes/anillo1.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo Solitario 14K">
-            <img src="imagenes/anillo2.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo Alianza 18K">
-            <img src="imagenes/anillo3.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo con Piedras 14K">
-            <img src="imagenes/anillo4.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo Clásico 10K">
+            <img src="imagenes/anillo1.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo Solitario">
+            <img src="imagenes/anillo2.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo Alianza">
+            <img src="imagenes/anillo3.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo con Piedras">
+            <img src="imagenes/anillo4.jpg" alt="Anillo" class="img-opcion" data-nombre="Anillo Clásico">
         </div>
         <div class="formulario">
+            <div class="aviso-peso">
+                <strong>Tú eliges el peso: de 4 a 200 gramos</strong>
+                Cada pieza debe pesar mínimo 4 gramos para que no quede delgada, y máximo 200 gramos. El precio se calcula con el peso que elijas por el precio del oro por gramo de la calidad que escojas.
+            </div>
             <div class="grupo-form">
                 <label>Número del anillo</label>
                 <input type="text" id="medida-anillo" placeholder="Ej: 7">
@@ -112,15 +140,24 @@
                 <input type="text" id="modelo-anillo" placeholder="Selecciona una imagen" readonly>
             </div>
             <div class="grupo-form">
+                <label>Peso de la pieza (gramos)</label>
+                <input type="number" id="peso-anillo" class="input-peso" placeholder="Ej: 10 (mín. 4, máx. 200)" min="4" max="200" step="0.1" inputmode="decimal">
+            </div>
+            <div class="grupo-form">
                 <label>Calidad del oro</label>
                 <div class="opciones-k">
-                    <button type="button" class="btn-k">10K</button>
-                    <button type="button" class="btn-k">12K</button>
-                    <button type="button" class="btn-k">14K</button>
-                    <button type="button" class="btn-k">18K</button>
+                    <button type="button" class="btn-k" data-k="10K">10K<small>$1,750 / gr</small></button>
+                    <button type="button" class="btn-k" data-k="12K">12K<small>$2,100 / gr</small></button>
+                    <button type="button" class="btn-k" data-k="14K">14K<small>$2,550 / gr</small></button>
+                    <button type="button" class="btn-k" data-k="18K">18K<small>$3,000 / gr</small></button>
                 </div>
             </div>
-            <button class="btn-comprar" onclick="irPagina('pag-pago')">Continuar compra</button>
+            <div class="precio-total">
+                <span class="precio-etiqueta">Precio estimado</span>
+                <strong class="precio-valor">Elige tu peso y la calidad de oro</strong>
+                <span class="precio-detalle"></span>
+            </div>
+            <button class="btn-comprar" onclick="continuarCompra()">Continuar compra</button>
         </div>
     </div>
 </section>
@@ -131,12 +168,16 @@
     <h2 class="titulo-pagina">Pulseras</h2>
     <div class="contenedor-pagina">
         <div class="galeria">
-            <img src="imagenes/pulsera1.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Esclava 14K">
-            <img src="imagenes/pulsera2.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Tejido 18K">
-            <img src="imagenes/pulsera3.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Forzada 12K">
-            <img src="imagenes/pulsera4.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Clásica 10K">
+            <img src="imagenes/pulsera1.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Esclava">
+            <img src="imagenes/pulsera2.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Tejido">
+            <img src="imagenes/pulsera3.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Forzada">
+            <img src="imagenes/pulsera4.jpg" alt="Pulsera" class="img-opcion" data-nombre="Pulsera Clásica">
         </div>
         <div class="formulario">
+            <div class="aviso-peso">
+                <strong>Tú eliges el peso: de 4 a 200 gramos</strong>
+                Cada pieza debe pesar mínimo 4 gramos para que no quede delgada, y máximo 200 gramos. El precio se calcula con el peso que elijas por el precio del oro por gramo de la calidad que escojas.
+            </div>
             <div class="grupo-form">
                 <label>Medida en centímetros</label>
                 <input type="text" id="medida-pulsera" placeholder="Ej: 18 cm">
@@ -146,15 +187,24 @@
                 <input type="text" id="modelo-pulsera" placeholder="Selecciona una imagen" readonly>
             </div>
             <div class="grupo-form">
+                <label>Peso de la pieza (gramos)</label>
+                <input type="number" id="peso-pulsera" class="input-peso" placeholder="Ej: 10 (mín. 4, máx. 200)" min="4" max="200" step="0.1" inputmode="decimal">
+            </div>
+            <div class="grupo-form">
                 <label>Calidad del oro</label>
                 <div class="opciones-k">
-                    <button type="button" class="btn-k">10K</button>
-                    <button type="button" class="btn-k">12K</button>
-                    <button type="button" class="btn-k">14K</button>
-                    <button type="button" class="btn-k">18K</button>
+                    <button type="button" class="btn-k" data-k="10K">10K<small>$1,750 / gr</small></button>
+                    <button type="button" class="btn-k" data-k="12K">12K<small>$2,100 / gr</small></button>
+                    <button type="button" class="btn-k" data-k="14K">14K<small>$2,550 / gr</small></button>
+                    <button type="button" class="btn-k" data-k="18K">18K<small>$3,000 / gr</small></button>
                 </div>
             </div>
-            <button class="btn-comprar" onclick="irPagina('pag-pago')">Continuar compra</button>
+            <div class="precio-total">
+                <span class="precio-etiqueta">Precio estimado</span>
+                <strong class="precio-valor">Elige tu peso y la calidad de oro</strong>
+                <span class="precio-detalle"></span>
+            </div>
+            <button class="btn-comprar" onclick="continuarCompra()">Continuar compra</button>
         </div>
     </div>
 </section>
@@ -164,7 +214,7 @@
     <button class="btn-volver" onclick="irPaginaAnterior()">← Volver</button>
     <h2 class="titulo-pagina">Método de pago</h2>
     <p class="subtitulo-pagina">Selecciona cómo deseas pagar</p>
-    
+
     <div class="contenido-pago">
         <!-- Tarjeta Crédito/Débito -->
         <div class="metodo-pago" data-metodo="tarjeta" onclick="seleccionarMetodo(this)">
@@ -247,8 +297,11 @@
             <p><strong>Teléfono:</strong> <span id="nota-telefono"></span></p>
             <p><strong>Pieza:</strong> <span id="nota-pieza"></span></p>
             <p><strong>Modelo:</strong> <span id="nota-modelo"></span></p>
+            <p><strong>Medida:</strong> <span id="nota-medida"></span></p>
             <p><strong>Calidad de oro:</strong> <span id="nota-k"></span></p>
+            <p><strong>Peso:</strong> <span id="nota-peso"></span></p>
             <p><strong>Método de pago:</strong> <span id="nota-metodo"></span></p>
+            <p class="nota-total"><strong>Total:</strong> <span id="nota-total"></span></p>
             <hr style="margin:15px 0; border-color:var(--borde)">
             <p>Nos pondremos en contacto contigo para confirmar tu pedido.</p>
         </div>
@@ -256,11 +309,117 @@
     </div>
 </section>
 
+<!-- PÁGINA 9: CARRITO -->
+<section class="pagina" id="pag-carrito">
+    <button class="btn-volver" onclick="irPagina('pag-inicio')">← Volver</button>
+    <h2 class="titulo-pagina">Mi carrito</h2>
+    <p class="subtitulo-pagina">Tus notas de pedido</p>
+    <div class="contenido-pago" id="lista-carrito"></div>
+</section>
+
 <script>
 let paginaAnterior = 'pag-categorias';
 let metodoSeleccionado = null;
 let datosPedido = {};
 
+// ===== PRECIO DEL ORO POR GRAMO (cámbialos aquí cuando varíen) =====
+const PRECIO_GRAMO = {
+    '10K': 1750,
+    '12K': 2100,
+    '14K': 2550,
+    '18K': 3000
+};
+
+function formatoMoneda(n) {
+    return '$' + n.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' MXN';
+}
+
+// Peso permitido (en gramos)
+const PESO_MIN = 4;
+const PESO_MAX = 200;
+
+// Calcula peso, calidad y total según lo que el cliente escribió/eligió en esa página
+function calcularPrecio(pagina) {
+    const btn = pagina.querySelector('.btn-k.seleccionado');
+    const campoPeso = pagina.querySelector('input[id^="peso"]');
+    const escrito = campoPeso ? String(campoPeso.value).trim().replace(',', '.') : '';
+    const numero = escrito === '' ? NaN : parseFloat(escrito);
+    const pesoValido = !isNaN(numero) && numero >= PESO_MIN && numero <= PESO_MAX;
+    const gramos = pesoValido ? numero : null;
+    const k = btn ? btn.dataset.k : null;
+    const total = (gramos && k) ? Math.round(gramos * PRECIO_GRAMO[k] * 100) / 100 : null;
+    return { gramos, k, total, hayPeso: escrito !== '', pesoValido };
+}
+
+// Muestra el precio estimado en la página de personalización
+function actualizarPrecio(pagina) {
+    const { gramos, k, total, hayPeso, pesoValido } = calcularPrecio(pagina);
+    const valor = pagina.querySelector('.precio-valor');
+    const detalle = pagina.querySelector('.precio-detalle');
+    if (!valor || !detalle) return;
+
+    if (hayPeso && !pesoValido) {
+        valor.textContent = 'Peso no válido';
+        detalle.textContent = 'El peso debe estar entre ' + PESO_MIN + ' y ' + PESO_MAX + ' gramos';
+    } else if (total) {
+        valor.textContent = formatoMoneda(total);
+        detalle.textContent = gramos + ' gr × $' + PRECIO_GRAMO[k].toLocaleString('es-MX') + ' por gramo (' + k + ')';
+    } else {
+        valor.textContent = 'Elige tu peso y la calidad de oro';
+        detalle.textContent = '';
+    }
+}
+
+// ===== CARRITO (se guarda en el navegador) =====
+let carrito = [];
+try {
+    carrito = JSON.parse(localStorage.getItem('carritoDiamante')) || [];
+} catch (e) {
+    carrito = [];
+}
+
+function guardarCarrito() {
+    try {
+        localStorage.setItem('carritoDiamante', JSON.stringify(carrito));
+    } catch (e) {}
+}
+
+function actualizarContador() {
+    document.querySelector('.contador').textContent = carrito.length;
+}
+
+function escapar(texto) {
+    const d = document.createElement('div');
+    d.textContent = texto;
+    return d.innerHTML;
+}
+
+function mostrarCarrito() {
+    const lista = document.getElementById('lista-carrito');
+    if (carrito.length === 0) {
+        lista.innerHTML = '<p class="texto-ayuda">Aún no tienes pedidos en tu carrito.</p>';
+    } else {
+        lista.innerHTML = carrito.map(p => `
+            <div class="item-carrito">
+                <p class="folio-carrito">${escapar(p.folio)}</p>
+                <p><strong>Fecha:</strong> ${escapar(p.fecha)}</p>
+                <p><strong>Pieza:</strong> ${escapar(p.pieza)}</p>
+                <p><strong>Modelo:</strong> ${escapar(p.modelo)}</p>
+                <p><strong>Medida:</strong> ${escapar(p.medida)}</p>
+                <p><strong>Calidad de oro:</strong> ${escapar(p.oro)}</p>
+                ${p.peso ? `<p><strong>Peso:</strong> ${escapar(p.peso)}</p>` : ''}
+                <p><strong>Método de pago:</strong> ${escapar(p.metodo)}</p>
+                <p><strong>Cliente:</strong> ${escapar(p.nombre)} · ${escapar(p.telefono)}</p>
+                ${p.total ? `<p class="total-carrito"><strong>Total:</strong> ${escapar(p.total)}</p>` : ''}
+            </div>
+        `).join('');
+    }
+    irPagina('pag-carrito');
+}
+
+actualizarContador();
+
+// ===== NAVEGACIÓN =====
 function irPagina(idPagina) {
     if (idPagina === 'pag-pago') {
         paginaAnterior = document.querySelector('.pagina.activa').id;
@@ -275,39 +434,68 @@ function irPaginaAnterior() {
     irPagina(paginaAnterior);
 }
 
+// Antes de pasar al pago, revisa modelo, peso y calidad de oro
+function continuarCompra() {
+    const pagina = document.querySelector('.pagina.activa');
+    const hayModelo = pagina.querySelector('.img-opcion.seleccionada');
+    const hayOro = pagina.querySelector('.btn-k.seleccionado');
+    const { pesoValido } = calcularPrecio(pagina);
+    if (!hayModelo) {
+        alert('Elige un modelo para continuar');
+        return;
+    }
+    if (!pesoValido) {
+        alert('Escribe el peso de tu pieza: mínimo ' + PESO_MIN + ' y máximo ' + PESO_MAX + ' gramos');
+        return;
+    }
+    if (!hayOro) {
+        alert('Elige la calidad del oro para ver tu precio');
+        return;
+    }
+    irPagina('pag-pago');
+}
+
 function guardarDatosPedido() {
     const paginaActiva = document.querySelector('.pagina.activa');
     const id = paginaActiva.id;
-    let tipoPieza = '', modelo = '', medida = '', oro = '';
+    let tipoPieza = '', modelo = '', medida = '';
 
     if (id === 'pag-cadenas') {
         tipoPieza = 'Cadena';
         modelo = document.getElementById('modelo-cadena').value || 'No seleccionado';
         medida = document.getElementById('medida-cadena').value || 'No especificada';
-        oro = document.querySelector('#pag-cadenas .btn-k.seleccionado')?.textContent || 'No seleccionado';
     } else if (id === 'pag-anillos') {
         tipoPieza = 'Anillo';
         modelo = document.getElementById('modelo-anillo').value || 'No seleccionado';
         medida = document.getElementById('medida-anillo').value || 'No especificada';
-        oro = document.querySelector('#pag-anillos .btn-k.seleccionado')?.textContent || 'No seleccionado';
     } else if (id === 'pag-pulseras') {
         tipoPieza = 'Pulsera';
         modelo = document.getElementById('modelo-pulsera').value || 'No seleccionado';
         medida = document.getElementById('medida-pulsera').value || 'No especificada';
-        oro = document.querySelector('#pag-pulseras .btn-k.seleccionado')?.textContent || 'No seleccionado';
     }
 
-    datosPedido = { tipoPieza, modelo, medida, oro };
+    const { gramos, k, total } = calcularPrecio(paginaActiva);
+    const metodoPrevio = datosPedido.metodoPago;
+
+    datosPedido = {
+        tipoPieza,
+        modelo,
+        medida,
+        oro: k || 'No seleccionado',
+        gramos,
+        total,
+        metodoPago: metodoPrevio
+    };
 }
 
 function seleccionarMetodo(elemento) {
     document.querySelectorAll('.metodo-pago').forEach(m => m.classList.remove('activo'));
     document.querySelectorAll('.form-pago').forEach(f => f.classList.remove('visible'));
-    
+
     elemento.classList.add('activo');
     metodoSeleccionado = elemento.dataset.metodo;
     document.getElementById(`form-${metodoSeleccionado}`).classList.add('visible');
-    
+
     const nombres = {
         tarjeta: 'Tarjeta de Crédito / Débito',
         paypal: 'PayPal',
@@ -321,7 +509,7 @@ function seleccionarMetodo(elemento) {
 function generarNota() {
     const nombre = document.getElementById('cliente-nombre').value.trim();
     const telefono = document.getElementById('cliente-telefono').value.trim();
-    
+
     if (!nombre || !telefono) {
         alert('Por favor llena tu nombre y teléfono');
         return;
@@ -333,14 +521,37 @@ function generarNota() {
     });
     const folio = 'PED-' + Date.now().toString().slice(-8);
 
+    const pesoTexto = datosPedido.gramos ? datosPedido.gramos + ' gr' : 'No disponible';
+    const totalTexto = datosPedido.total ? formatoMoneda(datosPedido.total) : 'No disponible';
+
     document.getElementById('nota-folio').textContent = folio;
     document.getElementById('nota-fecha').textContent = fechaTexto;
     document.getElementById('nota-nombre').textContent = nombre;
     document.getElementById('nota-telefono').textContent = telefono;
     document.getElementById('nota-pieza').textContent = datosPedido.tipoPieza;
     document.getElementById('nota-modelo').textContent = datosPedido.modelo;
+    document.getElementById('nota-medida').textContent = datosPedido.medida;
     document.getElementById('nota-k').textContent = datosPedido.oro;
+    document.getElementById('nota-peso').textContent = pesoTexto;
     document.getElementById('nota-metodo').textContent = datosPedido.metodoPago || 'No especificado';
+    document.getElementById('nota-total').textContent = totalTexto;
+
+    // Guardar el comprobante en el carrito
+    carrito.unshift({
+        folio,
+        fecha: fechaTexto,
+        nombre,
+        telefono,
+        pieza: datosPedido.tipoPieza,
+        modelo: datosPedido.modelo,
+        medida: datosPedido.medida,
+        oro: datosPedido.oro,
+        peso: datosPedido.gramos ? pesoTexto : '',
+        total: datosPedido.total ? totalTexto : '',
+        metodo: datosPedido.metodoPago || 'No especificado'
+    });
+    guardarCarrito();
+    actualizarContador();
 
     irPagina('pag-nota');
 }
@@ -349,19 +560,29 @@ function resetearTodo() {
     document.querySelectorAll('input').forEach(i => i.value = '');
     document.querySelectorAll('.btn-k, .metodo-pago, .img-opcion').forEach(el => el.classList.remove('seleccionado', 'activo', 'seleccionada'));
     document.querySelectorAll('.form-pago').forEach(f => f.classList.remove('visible'));
+    ['pag-cadenas', 'pag-anillos', 'pag-pulseras'].forEach(id => actualizarPrecio(document.getElementById(id)));
     metodoSeleccionado = null;
     datosPedido = {};
 }
 
-// Seleccionar oro
+// Seleccionar oro → actualiza el precio
 document.addEventListener('click', e => {
-    if (e.target.classList.contains('btn-k')) {
-        e.target.parentElement.querySelectorAll('.btn-k').forEach(b => b.classList.remove('seleccionado'));
-        e.target.classList.add('seleccionado');
+    const boton = e.target.closest('.btn-k');
+    if (boton) {
+        boton.parentElement.querySelectorAll('.btn-k').forEach(b => b.classList.remove('seleccionado'));
+        boton.classList.add('seleccionado');
+        actualizarPrecio(boton.closest('.pagina'));
     }
 });
 
-// Seleccionar imagen → llena modelo
+// Escribir el peso → actualiza el precio
+document.addEventListener('input', e => {
+    if (e.target.id && e.target.id.startsWith('peso')) {
+        actualizarPrecio(e.target.closest('.pagina'));
+    }
+});
+
+// Seleccionar imagen → llena el modelo
 document.addEventListener('click', e => {
     if (e.target.classList.contains('img-opcion')) {
         const galeria = e.target.parentElement;
@@ -371,6 +592,7 @@ document.addEventListener('click', e => {
         const pagina = e.target.closest('.pagina');
         const campo = pagina.querySelector('input[id^="modelo"]');
         if (campo) campo.value = nombre;
+        actualizarPrecio(pagina);
     }
 });
 </script>
