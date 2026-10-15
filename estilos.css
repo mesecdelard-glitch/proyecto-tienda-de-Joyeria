@@ -156,10 +156,42 @@ body {
     text-align: center;
     padding: 20px;
 }
-.img-inicio {
+.video-inicio {
+    display: block;
+    width: min(340px, 42vh);       /* nunca más alto que la pantalla */
+    aspect-ratio: 1 / 1;           /* recorta el video a un cuadro, aunque sea vertical */
+    object-fit: cover;
+    object-position: 50% 27%;      /* encuadra el diamante; sube/baja este % si hace falta */
+    margin-bottom: 20px;
+    background: transparent;
+    mix-blend-mode: screen;        /* el fondo negro del video se funde con la página */
+    -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 55%, transparent 100%);
+    mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 55%, transparent 100%);
+    pointer-events: none;          /* no se puede dar clic ni cambiar tiempo/volumen */
+    user-select: none;
+    -webkit-user-select: none;
+}
+.video-inicio::-webkit-media-controls,
+.video-inicio::-webkit-media-controls-enclosure,
+.video-inicio::-webkit-media-controls-panel,
+.video-inicio::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+}
+
+/* LUCES QUE VUELAN (solo página de inicio) */
+.luces-fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 320px;
-    margin-bottom: 30px;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+#pag-inicio .contenido-centrado {
+    position: relative;
+    z-index: 1;
 }
 .contenido-centrado h1 {
     font-family: var(--fuente-titulos);
