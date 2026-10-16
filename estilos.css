@@ -19,6 +19,17 @@
     --resaltado: rgba(212, 175, 55, 0.15);
     --fuente-titulos: 'Playfair Display', serif;
     --fuente-texto: 'Inter', sans-serif;
+
+    /* Alturas de la barra y la cinta (cambian en pantallas chicas) */
+    --alto-barra: 65px;
+    --alto-cinta: 34px;
+    --alto-header: calc(var(--alto-barra) + var(--alto-cinta));
+    --lado: 20px;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -26,6 +37,17 @@ body {
     background-color: var(--negro);
     color: var(--texto);
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img, video, canvas {
+    max-width: 100%;
+}
+
+/* Botones e inputs cómodos para el dedo */
+button {
+    font-family: inherit;
+    touch-action: manipulation;
 }
 
 /* BARRA SUPERIOR */
@@ -34,13 +56,15 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 65px;
+    height: var(--alto-barra);
     background: var(--negro-suave);
     border-bottom: 1px solid var(--borde);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    gap: 10px;
+    padding: 0 max(var(--lado), env(safe-area-inset-right)) 0 max(var(--lado), env(safe-area-inset-left));
+    padding-top: env(safe-area-inset-top);
     z-index: 100;
 }
 .logo {
@@ -49,6 +73,7 @@ body {
     font-weight: 700;
     letter-spacing: 3px;
     color: var(--dorado);
+    white-space: nowrap;
 }
 .nav-botones {
     display: flex;
@@ -77,11 +102,14 @@ body {
     cursor: pointer;
     position: relative;
     color: var(--texto);
+    padding: 8px 10px;
+    min-width: 44px;
+    min-height: 44px;
 }
 .contador {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: 2px;
+    right: 0;
     background: var(--dorado);
     color: var(--negro);
     font-size: 11px;
@@ -97,10 +125,10 @@ body {
 /* CINTA DE TEXTO (izquierda → derecha) */
 .cinta-texto {
     position: fixed;
-    top: 65px;
+    top: calc(var(--alto-barra) + env(safe-area-inset-top));
     left: 0;
     right: 0;
-    height: 34px;
+    height: var(--alto-cinta);
     background: var(--dorado);
     color: var(--negro);
     overflow: hidden;
@@ -130,16 +158,25 @@ body {
     .cinta-pista { animation: none; }
 }
 
-/* PÁGINAS */
+/* PÁGINAS
+   Se usa 100dvh (alto real visible en celular) con 100vh como respaldo,
+   para que la barra del navegador móvil no tape el contenido. */
 .pagina {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
+    height: 100dvh;
     display: none;
     position: absolute;
     top: 0;
     left: 0;
-    padding: 119px 20px 30px;
+    padding-top: calc(var(--alto-header) + env(safe-area-inset-top) + 20px);
+    padding-right: max(var(--lado), env(safe-area-inset-right));
+    padding-bottom: calc(30px + env(safe-area-inset-bottom));
+    padding-left: max(var(--lado), env(safe-area-inset-left));
     overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     background: var(--negro);
 }
 .pagina.activa {
@@ -152,22 +189,25 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 119px);
+    min-height: calc(100vh - var(--alto-header) - 60px);
+    min-height: calc(100dvh - var(--alto-header) - 60px);
     text-align: center;
-    padding: 20px;
+    padding: 10px 0;
+    width: 100%;
 }
 .video-inicio {
     display: block;
-    width: min(340px, 42vh);       /* nunca más alto que la pantalla */
-    aspect-ratio: 1 / 1;           /* recorta el video a un cuadro, aunque sea vertical */
+    width: min(340px, 42vh, 70vw);
+    width: min(340px, 42dvh, 70vw);
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    object-position: 50% 27%;      /* encuadra el diamante; sube/baja este % si hace falta */
+    object-position: 50% 27%;
     margin-bottom: 20px;
     background: transparent;
-    mix-blend-mode: screen;        /* el fondo negro del video se funde con la página */
+    mix-blend-mode: screen;
     -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 55%, transparent 100%);
     mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 55%, transparent 100%);
-    pointer-events: none;          /* no se puede dar clic ni cambiar tiempo/volumen */
+    pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
 }
@@ -193,12 +233,15 @@ body {
     position: relative;
     z-index: 1;
 }
-.contenido-centrado h1 {
+.contenido-centrado h1,
+.contenido-centrado h2 {
     font-family: var(--fuente-titulos);
-    font-size: clamp(28px, 6vw, 42px);
+    font-size: clamp(24px, 6vw, 42px);
     margin-bottom: 12px;
     letter-spacing: 2px;
     color: var(--dorado);
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 .subtitulo {
     color: var(--texto-apagado);
@@ -210,15 +253,12 @@ body {
     color: var(--negro);
     border: none;
     padding: 16px 48px;
+    min-height: 50px;
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s;
-}
-.btn-principal:hover {
-    background: linear-gradient(135deg, var(--dorado-claro) 0%, var(--dorado) 100%);
-    transform: translateY(-2px);
 }
 
 /* BOTÓN VOLVER */
@@ -228,12 +268,10 @@ body {
     color: var(--texto-apagado);
     font-size: 15px;
     cursor: pointer;
-    margin-bottom: 25px;
-    padding: 0;
+    margin-bottom: 15px;
+    padding: 10px 10px 10px 0;
+    min-height: 44px;
     transition: color 0.3s;
-}
-.btn-volver:hover {
-    color: var(--dorado);
 }
 
 /* TÍTULO DE PÁGINA */
@@ -254,6 +292,7 @@ body {
     flex-wrap: wrap;
     gap: 25px;
     justify-content: center;
+    margin-top: 20px;
 }
 .opcion {
     flex: 1 1 260px;
@@ -264,11 +303,6 @@ body {
     cursor: pointer;
     transition: all 0.3s;
     background: var(--negro-suave);
-}
-.opcion:hover {
-    border-color: var(--dorado);
-    background: var(--resaltado);
-    transform: translateY(-4px);
 }
 .numero {
     font-size: 32px;
@@ -290,13 +324,10 @@ body {
     border: 1px solid var(--dorado);
     color: var(--dorado);
     padding: 10px 24px;
+    min-height: 44px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-}
-.btn-vamos:hover {
-    background: var(--dorado);
-    color: var(--negro);
 }
 
 /* IMAGEN EN CATEGORÍAS */
@@ -309,21 +340,18 @@ body {
     background: var(--gris-oscuro);
     transition: border-color 0.3s;
 }
-.opcion:hover .img-categoria {
-    border-color: var(--dorado);
-}
 
-/* CONTENEDOR PRODUCTOS */
+/* CONTENEDOR PRODUCTOS (celular y tablet: galería arriba, formulario abajo) */
 .contenedor-pagina {
     display: flex;
-    flex-wrap: wrap-reverse;
-    gap: 40px;
+    flex-direction: column;
+    gap: 30px;
 }
 .galeria {
-    flex: 1 1 300px;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
 }
 .img-opcion {
     width: 100%;
@@ -334,15 +362,12 @@ body {
     transition: all 0.3s;
     background: var(--gris-oscuro);
 }
-.img-opcion:hover {
-    border-color: var(--gris-medio);
-}
 .img-opcion.seleccionada {
     border-color: var(--dorado);
     box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.25);
 }
 .formulario {
-    flex: 1 1 300px;
+    width: 100%;
 }
 .grupo-form {
     margin-bottom: 25px;
@@ -358,10 +383,14 @@ body {
     width: 100%;
     padding: 14px 16px;
     border: 1px solid var(--borde);
-    font-size: 15px;
+    border-radius: 0;
+    font-size: 16px;            /* 16px evita que iPhone haga zoom al escribir */
+    font-family: inherit;
     background: var(--negro-suave);
     color: var(--texto);
     transition: border-color 0.3s;
+    -webkit-appearance: none;
+    appearance: none;
 }
 .grupo-form input:focus {
     outline: none;
@@ -392,31 +421,31 @@ input[readonly] {
 
 /* BOTONES ORO */
 .opciones-k {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 .btn-k {
-    padding: 12px 20px;
+    padding: 12px 8px;
+    min-height: 56px;
     border: 1px solid var(--borde);
     background: var(--negro-suave);
     color: var(--texto);
     cursor: pointer;
+    font-size: 15px;
     font-weight: 500;
     transition: all 0.2s;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 3px;
 }
 .btn-k small {
     font-size: 11px;
     font-weight: 400;
     opacity: 0.75;
-}
-.btn-k:hover {
-    border-color: var(--dorado);
-    color: var(--dorado);
+    white-space: nowrap;
 }
 .btn-k.seleccionado {
     background: var(--dorado);
@@ -443,6 +472,7 @@ input[readonly] {
     font-family: var(--fuente-titulos);
     font-size: 24px;
     color: var(--dorado);
+    overflow-wrap: anywhere;
 }
 .precio-detalle {
     display: block;
@@ -461,19 +491,17 @@ input[readonly] {
     color: var(--negro);
     border: none;
     padding: 16px;
+    min-height: 52px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
     transition: all 0.3s;
 }
-.btn-comprar:hover {
-    background: linear-gradient(135deg, var(--dorado-claro) 0%, var(--dorado) 100%);
-    transform: translateY(-2px);
-}
 
 /* PAGOS */
 .contenido-pago {
+    width: 100%;
     max-width: 500px;
 }
 .metodo-pago {
@@ -483,10 +511,6 @@ input[readonly] {
     cursor: pointer;
     transition: all 0.3s;
     background: var(--negro-suave);
-}
-.metodo-pago:hover {
-    border-color: var(--dorado);
-    background: var(--resaltado);
 }
 .metodo-pago.activo {
     border-color: var(--dorado);
@@ -520,11 +544,14 @@ input[readonly] {
 
 /* RECIBO / NOTA */
 .recibo {
+    width: 100%;
+    max-width: 520px;
     border: 1px solid var(--dorado);
     padding: 40px 30px;
     text-align: center;
     margin: 30px 0;
     background: var(--negro-suave);
+    overflow-wrap: anywhere;
 }
 .recibo h3 {
     font-family: var(--fuente-titulos);
@@ -560,6 +587,7 @@ input[readonly] {
     background: var(--negro-suave);
     padding: 22px 24px;
     margin-bottom: 18px;
+    overflow-wrap: anywhere;
 }
 .folio-carrito {
     font-family: var(--fuente-titulos);
@@ -584,38 +612,185 @@ input[readonly] {
     color: var(--dorado);
 }
 
-/* RESPONSIVO */
+/* EFECTOS HOVER: solo en dispositivos con mouse (en táctiles se quedaban "pegados") */
+@media (hover: hover) {
+    .btn-principal:hover,
+    .btn-comprar:hover {
+        background: linear-gradient(135deg, var(--dorado-claro) 0%, var(--dorado) 100%);
+        transform: translateY(-2px);
+    }
+    .btn-volver:hover { color: var(--dorado); }
+    .opcion:hover {
+        border-color: var(--dorado);
+        background: var(--resaltado);
+        transform: translateY(-4px);
+    }
+    .opcion:hover .img-categoria { border-color: var(--dorado); }
+    .btn-vamos:hover { background: var(--dorado); color: var(--negro); }
+    .img-opcion:hover { border-color: var(--gris-medio); }
+    .btn-k:hover { border-color: var(--dorado); color: var(--dorado); }
+    .btn-k.seleccionado:hover { color: var(--negro); }
+    .metodo-pago:hover {
+        border-color: var(--dorado);
+        background: var(--resaltado);
+    }
+}
+/* En táctil, respuesta al tocar */
+.btn-principal:active,
+.btn-comprar:active { transform: scale(0.98); }
+
+/* ===== TABLET (600px – 1023px) ===== */
+@media (min-width: 600px) {
+    .galeria {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .formulario {
+        max-width: 640px;
+        margin: 0 auto;
+    }
+}
+
+/* ===== COMPUTADORA (1024px o más) ===== */
+@media (min-width: 1024px) {
+    .contenedor-pagina {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+    }
+    .galeria {
+        flex: 1 1 300px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .formulario {
+        flex: 1 1 300px;
+        max-width: none;
+        margin: 0;
+    }
+}
+
+/* ===== CELULAR (hasta 768px) ===== */
 @media (max-width: 768px) {
-    .barra-superior {
-        padding: 0 15px;
+    :root {
+        --alto-barra: 58px;
+        --alto-cinta: 30px;
+        --lado: 15px;
     }
     .logo {
         font-size: 18px;
+        letter-spacing: 2px;
     }
-    .pagina {
-        padding: 109px 15px 20px;
+    .btn-idioma {
+        padding: 6px 14px;
+        font-size: 14px;
+        min-height: 36px;
     }
-    .galeria {
-        grid-template-columns: repeat(2, 1fr);
+    .cinta-pista span {
+        font-size: 12px;
+    }
+    .subtitulo {
+        margin-bottom: 30px;
+        font-size: 15px;
     }
     .opcion {
         max-width: 100%;
+        flex-basis: 100%;
+        padding: 25px 20px;
+    }
+    .img-categoria {
+        aspect-ratio: 16 / 10;
     }
 }
+
+/* ===== CELULAR CHICO (hasta 480px) ===== */
 @media (max-width: 480px) {
+    .logo {
+        font-size: 16px;
+        letter-spacing: 1.5px;
+    }
+    .nav-botones {
+        gap: 6px;
+    }
+    .btn-idioma {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    .btn-principal {
+        padding: 15px 36px;
+    }
     .galeria {
         gap: 10px;
     }
+    .opciones-k {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .btn-k {
-        padding: 10px 14px;
         font-size: 14px;
     }
-}
-@media (min-width: 1024px) {
-    .contenedor-pagina {
-        flex-wrap: nowrap;
+    .aviso-peso {
+        padding: 12px 14px;
+        font-size: 13px;
     }
-    .galeria {
-        grid-template-columns: repeat(2, 1fr);
+    .precio-valor {
+        font-size: 20px;
+    }
+    .metodo-pago {
+        padding: 16px 16px;
+    }
+    .form-pago {
+        padding-left: 14px;
+    }
+    .fila-doble {
+        gap: 0;
+    }
+    .fila-doble .grupo-form {
+        flex-basis: 100%;
+    }
+    .recibo {
+        padding: 28px 18px;
+    }
+    .recibo h3 {
+        font-size: 20px;
+    }
+    .item-carrito {
+        padding: 18px 16px;
+    }
+}
+
+/* ===== CELULAR MUY CHICO (hasta 360px) ===== */
+@media (max-width: 360px) {
+    .logo {
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+    .btn-idioma {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
+}
+
+/* ===== CELULAR/TABLET ACOSTADO (poca altura) ===== */
+@media (max-height: 520px) and (orientation: landscape) {
+    :root {
+        --alto-barra: 48px;
+        --alto-cinta: 26px;
+    }
+    .pagina {
+        padding-top: calc(var(--alto-header) + env(safe-area-inset-top) + 12px);
+    }
+    .video-inicio {
+        width: min(180px, 40vh);
+        width: min(180px, 40dvh);
+        margin-bottom: 8px;
+    }
+    .subtitulo {
+        margin-bottom: 16px;
+    }
+    .btn-principal {
+        padding: 12px 36px;
+        min-height: 44px;
+    }
+    .contenido-centrado {
+        min-height: calc(100dvh - var(--alto-header) - 40px);
     }
 }
