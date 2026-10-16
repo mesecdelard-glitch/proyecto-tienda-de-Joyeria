@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#111111">
     <title>Joyería El Diamante</title>
     <link rel="stylesheet" href="estilos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -228,12 +229,12 @@
             💳 Tarjeta de Crédito / Débito
         </div>
         <div class="form-pago" id="form-tarjeta">
-            <div class="grupo-form"><label>Número de tarjeta</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+            <div class="grupo-form"><label>Número de tarjeta</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" autocomplete="cc-number"></div>
             <div class="fila-doble">
-                <div class="grupo-form"><label>Fecha de vencimiento</label><input type="text" placeholder="MM/AA" maxlength="5"></div>
-                <div class="grupo-form"><label>CVV</label><input type="text" placeholder="123" maxlength="4"></div>
+                <div class="grupo-form"><label>Fecha de vencimiento</label><input type="text" placeholder="MM/AA" maxlength="5" inputmode="numeric" autocomplete="cc-exp"></div>
+                <div class="grupo-form"><label>CVV</label><input type="text" placeholder="123" maxlength="4" inputmode="numeric" autocomplete="cc-csc"></div>
             </div>
-            <div class="grupo-form"><label>Nombre del titular</label><input type="text" placeholder="Tu nombre completo"></div>
+            <div class="grupo-form"><label>Nombre del titular</label><input type="text" placeholder="Tu nombre completo" autocomplete="cc-name"></div>
         </div>
 
         <!-- PayPal -->
@@ -241,7 +242,7 @@
             🅿️ PayPal
         </div>
         <div class="form-pago" id="form-paypal">
-            <div class="grupo-form"><label>Correo electrónico de PayPal</label><input type="email" placeholder="tu@email.com"></div>
+            <div class="grupo-form"><label>Correo electrónico de PayPal</label><input type="email" placeholder="tu@email.com" inputmode="email"></div>
         </div>
 
         <!-- OXXO PAY -->
@@ -258,7 +259,7 @@
         </div>
         <div class="form-pago" id="form-mercadopago">
             <p class="texto-ayuda">Paga con tu cuenta de Mercado Pago o con tarjeta</p>
-            <div class="grupo-form"><label>Correo de Mercado Pago</label><input type="email" placeholder="tu@email.com"></div>
+            <div class="grupo-form"><label>Correo de Mercado Pago</label><input type="email" placeholder="tu@email.com" inputmode="email"></div>
         </div>
 
         <!-- Tienda Física -->
@@ -281,11 +282,11 @@
     <div class="contenido-pago">
         <div class="grupo-form">
             <label>Nombre completo</label>
-            <input type="text" id="cliente-nombre" placeholder="María Pérez López">
+            <input type="text" id="cliente-nombre" placeholder="María Pérez López" autocomplete="name">
         </div>
         <div class="grupo-form">
             <label>Número de teléfono</label>
-            <input type="tel" id="cliente-telefono" placeholder="951 123 4567" maxlength="12">
+            <input type="tel" id="cliente-telefono" placeholder="951 123 4567" maxlength="12" inputmode="tel" autocomplete="tel">
         </div>
         <button class="btn-comprar" onclick="generarNota()">CONFIRMAR PEDIDO</button>
     </div>
@@ -433,11 +434,14 @@ function irPagina(idPagina) {
         guardarDatosPedido();
     }
     document.querySelectorAll('.pagina').forEach(p => p.classList.remove('activa'));
-    document.getElementById(idPagina).classList.add('activa');
+    const destino = document.getElementById(idPagina);
+    destino.classList.add('activa');
     if (idPagina === 'pag-inicio') {
         const video = document.getElementById('video-diamante');
         if (video) { video.muted = true; video.play().catch(() => {}); }
     }
+    // Cada página tiene su propio scroll: se regresa arriba al cambiar
+    destino.scrollTop = 0;
     window.scrollTo(0, 0);
 }
 
@@ -700,7 +704,9 @@ document.addEventListener('click', e => {
         ctx.globalCompositeOperation = 'source-over';
     }
 
+    // Reajusta al girar el celular o cambiar el tamaño de la ventana
     window.addEventListener('resize', ajustar);
+    window.addEventListener('orientationchange', () => setTimeout(ajustar, 200));
     ajustar();
     animar();
 })();
